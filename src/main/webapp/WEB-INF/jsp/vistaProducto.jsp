@@ -57,6 +57,11 @@
                       <form:input path="precio" type="text" class="form-control"
                           id="precio" placeholder="Ingresar precio..."/>
                   </div>
+                  <div class="form-group">
+                    <label for="stock">Stock</label>
+                      <form:input path="stock" type="text" class="form-control"
+                          id="stock" placeholder="Ingresar stock..."/>
+                  </div>
       
                   <form:button class="btn btn-default pull-right ">Editar!</form:button>
                   <br>
@@ -83,9 +88,10 @@
             <table class="table table-striped table-curved table-bordered table-hover results">
                 <thead>
                     <tr>
-                        <th class="col-md-8">Descripción</th>
+                        <th class="col-md-7">Descripción</th>
                         <th class="col-md-1">($) Precio</th>
-                        <th class="col-md-2">Opciones</th>
+                        <th class="col-md-1">Stock</th>
+                        <th class="col-md-3">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,7 +100,8 @@
                     <tr>
                         <td><c:out value="${Producto.descrip}"/></td>
                         <td><c:out value="${Producto.precio}"/></td>
-                        <td><a href='#myModalNorm' data-toggle='modal' data-descrip="<c:out value="${Producto.descrip}"/>" data-precio=<c:out value="${Producto.precio}"/> data-target='#myModalNorm' class='openmodal'><img src='img/editarnegro.png' alt='Icono de un lapiz de color negro' id='editar'></a><a href="borrarProducto?descrip=<c:out value="${Producto.descrip}"/>"><img src='img/cesto.png' alt='Icono de un cesto de basura negro' id='cesto'></a></td>
+                        <td><c:out value="${Producto.stock}"/></td>
+                       	<td><a href='#myModalNorm' data-toggle='modal' data-descrip="<c:out value="${Producto.descrip}"/>" data-precio=<c:out value="${Producto.precio}"/> data-stock=<c:out value="${Producto.stock}"/> data-target='#myModalNorm' class='openmodal'><img src='img/editarnegro.png' alt='Icono de un lapiz de color negro' id='editar'></a><a href="borrarProducto?descrip=<c:out value="${Producto.descrip}"/>"><img src='img/cesto.png' alt='Icono de un cesto de basura negro' id='cesto'></a></td>
                     </tr>
                     </c:if>
                 </c:forEach>
@@ -111,10 +118,13 @@
                 var cod = $(this).data('cod');
                 var descrip = $(this).data('descrip');
                 var precio = $(this).data('precio');
+                var stock = $(this).data('stock');
+
                 
                 $(".modal-body #cod").val( cod );
                 $(".modal-body #descrip").val( descrip );
                 $(".modal-body #precio").val( precio );
+                $(".modal-body #stock").val( stock );
             }); 
         </script>
         
@@ -194,7 +204,7 @@
       
     		$(".mostrar").click(function(){
     			
-    			$('.target').show(1000);
+    			$('.target').show(600);
     		 });
     		$(".ocultar").click(function(){
     			$('.target').hide("linear");
