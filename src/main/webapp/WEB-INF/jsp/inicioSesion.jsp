@@ -36,7 +36,7 @@
             <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
             <p id="profile-name" class="profile-name-card"></p>
-            <form:form class="form-signin" modelAttribute="Persona" method="POST" action="procesar-persona">
+            <form:form class="form-signin" modelAttribute="Persona" method="POST" >
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" required autofocus>
                 <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
