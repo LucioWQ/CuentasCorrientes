@@ -1,10 +1,14 @@
 package ar.edu.grupoesfera.cursospring.servicios;
 
 import java.util.Iterator;
+import java.util.TreeSet;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import ar.edu.grupoesfera.cursospring.modelo.ListadoProducto;
 import ar.edu.grupoesfera.cursospring.modelo.Producto;
 import ar.edu.grupoesfera.cursospring.servicios.ProductoService;
@@ -102,5 +106,55 @@ public class ProductoServiceImp implements ProductoService {
 		
 	}
 
+	@Override
+	public ModelMap sumarORestarStock(@ModelAttribute("Producto") Producto producto,Integer cant) throws Exception{
+		
+		if(producto != null && producto.getDescrip() != "" && !producto.getDescrip().startsWith(" ")){
+			
+			if(cant != null && cant != 0){
+				
+				ModelMap model = new ModelMap();
+				ListadoProducto listado = ListadoProducto.getInstance();
+				Iterator<Producto> iterator = listado.getLista().iterator();
+			
+				producto.setDescrip(producto.getDescrip().toLowerCase());
+				producto.setDescrip(producto.getDescrip().substring(0,1).toUpperCase()+ producto.getDescrip().substring(1));
+				
+				while(iterator.hasNext()){
+					
+					if(iterator.next().equals(producto)){
+						
+						try{			
+							iterator.next().cambiaStock(cant);
+						}catch(Exception e){
+							System.err.println("El Stock no se pudo modificar");
+						}		
+						
+					}
+				}
+				model.put("Listado", listado.getLista());
+				
+				return model;
+			
+			} else {
+				
+				throw new Exception("No especificó cantidad");
+			
+			}
+			
+		} else
+		
+	    throw new Exception("No específico ningún producto");
+	}
+		
+	@Override
+	public TreeSet<Producto> getLista(){
+		
+		ListadoProducto listado = ListadoProducto.getInstance();
+		
+		return listado.getLista();
+		
+	}
 	
 }
+
