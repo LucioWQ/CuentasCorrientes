@@ -33,7 +33,7 @@ public class Renglon {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "nroRenglon", unique = true, nullable = false)
+	@Column(name = "ID_Renglon_Remito", unique = true, nullable = false)
 	public Integer getNroRenglon() {
 		return nroRenglon;
 	}
