@@ -1,7 +1,15 @@
 package ar.edu.grupoesfera.cursospring.modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name = "Cliente", catalog = "Cuenta_Corriente_BD")
 public class Persona implements Comparable<Persona> {
-
+ private Integer persona_ID;
  private String nombre;
  private String apellido;
  private String email;
@@ -11,6 +19,16 @@ public class Persona implements Comparable<Persona> {
 
 public Persona (){
 
+}
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+@Column(name = "persona_ID", unique = true, nullable = false)
+public Integer getId() {
+	return persona_ID;
+}
+
+public void setId(Integer id) {
+	this.persona_ID = id;
 }
 
 public Persona (String nombre, String apellido, String email, String password) {
@@ -22,7 +40,7 @@ public Persona (String nombre, String apellido, String email, String password) {
 	 
  }
 
-
+@Column(name = "nombre", nullable = false, length = 50)
 public String getNombre() {
 	return nombre;
 }
@@ -31,6 +49,7 @@ public void setNombre(String nombre) {
 	this.nombre = nombre;
 }
 
+@Column(name = "apellido", nullable = false, length = 50)
 public String getApellido() {
 	return apellido;
 }
@@ -39,6 +58,7 @@ public void setApellido(String apellido) {
 	this.apellido = apellido;
 }
 
+@Column(name = "email", unique = true, nullable = false, length = 50)
 public String getEmail() {
 	return email;
 }
@@ -46,7 +66,7 @@ public String getEmail() {
 public void setEmail(String email) {
 	this.email = email;
 }
-
+@Column(name = "password", nullable = false)
 public String getPassword() {
 	return password;
 }
@@ -55,6 +75,7 @@ public void setPassword(String password) {
 	this.password = password;
 }
 
+@Column(name = "estado", nullable = false)
 public Boolean getEstado() {
 	return estado;
 }
